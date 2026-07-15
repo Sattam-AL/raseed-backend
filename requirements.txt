@@ -1,0 +1,27 @@
+# Raseed AI — إصدارات مثبّتة
+#
+# ⚠️ scikit-learn/pandas/numpy/joblib/scipy مثبّتة بالضبط لمطابقة
+# raseed_classifier.joblib (مدرَّب بـ scikit-learn==1.8.0 من عبدالله).
+# إصدار مختلف يعطي "InconsistentVersionWarning ... might lead to invalid
+# results" — ممكن يشتغل، وممكن يعطي تصنيف غلط بصمت. تم التحقق فعليًا
+# من عمل هذي التركيبة بالضبط بدون أي تحذير.
+
+fastapi==0.115.0
+uvicorn==0.30.0
+pydantic==2.7.0
+python-multipart==0.0.9
+pymupdf==1.24.0
+anthropic==0.30.0
+python-dotenv==1.0.0
+pdf2image==1.17.0
+pytesseract==0.3.10
+sqlalchemy==2.0.30
+psycopg2-binary==2.9.9
+
+# --- مثبّتة بالضبط (عبدالله) ---
+scikit-learn==1.8.0
+pandas==3.0.2
+numpy==2.4.4
+joblib==1.5.3
+scipy==1.17.1
+openpyxl==3.1.5

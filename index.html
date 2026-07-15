@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رصيد | Raseed AI — مستشارك المالي الذكي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="30" height="30">
+          <path d="M20 3 L34 12 V28 L20 37 L6 28 V12 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 12 L20 28 M13 19 L27 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="logo-text">رصيد</span>
+    </div>
+    <nav class="header-nav">
+      <a href="#chat">جرّب المساعد</a>
+      <a href="#twin">التوأم المالي</a>
+      <a href="#fund">الصندوق الاستثماري</a>
+      <a href="#classify">تصنيف المعاملات</a>
+    </nav>
+    <div class="header-status">
+      <span class="dot" id="apiDot"></span>
+      <span id="apiStatusText">يتصل بالخادم…</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">مستشار مالي · ذكاء اصطناعي · باللغة العربية</p>
+      <h1>أفضل قرار مالي<br><span class="accent-text">تتخذه قبل أن تدفع</span></h1>
+      <p class="hero-sub">
+        رصيد يقرأ دخلك ومصروفاتك والتزاماتك، ويجاوبك بصراحة: تقدر تشتري الحين؟
+        قسط ولا نقد؟ وش يصير لرصيدك بعد خمس سنوات لو اخترت هذا القرار؟
+      </p>
+      <div class="hero-actions">
+        <a href="#chat" class="btn btn-primary">اسأل رصيد الآن</a>
+        <a href="#twin" class="btn btn-ghost">جرّب محاكاة قرار</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="pulse-card">
+        <div class="pulse-label">النبض المالي</div>
+        <svg class="pulse-line" viewBox="0 0 400 120" preserveAspectRatio="none">
+          <polyline id="pulsePath" fill="none" stroke="url(#pulseGrad)" stroke-width="2.5"
+            points="0,80 40,80 55,30 70,95 90,60 130,60 145,20 160,100 180,60 220,60 235,35 250,85 270,60 400,60"/>
+          <defs>
+            <linearGradient id="pulseGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#E8825A"/>
+              <stop offset="100%" stop-color="#5FCF9B"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="pulse-figures">
+          <div><span class="fig-num" id="figScore">—</span><span class="fig-lbl">مؤشر الصحة المالية</span></div>
+          <div><span class="fig-num" id="figTx">—</span><span class="fig-lbl">معاملة تم تحليلها</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHAT ===== -->
+  <section id="chat" class="section chat-section">
+    <div class="wrap">
+      <p class="section-eyebrow">٠١ — المحادثة</p>
+      <h2>اسأله بشكل طبيعي، مثل ما تسأل صاحبك</h2>
+      <p class="section-lead">"هل أقدر أشتري سيارة؟" · "ليش مصاريفي مرتفعة؟" · "وين أقدر أوفر؟"</p>
+
+      <div class="chat-frame">
+        <div class="chat-profile">
+          <label class="field field-inline">
+            <span>دخلك الشهري</span>
+            <input type="number" id="chatIncome" value="12000" step="500">
+          </label>
+          <label class="field field-inline">
+            <span>مصاريفك الشهرية</span>
+            <input type="number" id="chatExpenses" value="7200" step="200">
+          </label>
+          <label class="field field-inline">
+            <span>رصيدك الحالي</span>
+            <input type="number" id="chatBalance" value="15400" step="500">
+          </label>
+        </div>
+        <div class="chat-window" id="chatWindow">
+          <div class="msg msg-bot">
+            <div class="msg-avatar">ر</div>
+            <div class="msg-bubble">
+              أنا رصيد، مستشارك المالي الذكي 🤖<br>
+              اسألني عن مصاريفك، أو جرّب: <em>«هل أقدر أشتري سيارة بـ ١٢٠ ألف؟»</em>
+            </div>
+          </div>
+        </div>
+        <form class="chat-input-row" id="chatForm">
+          <input type="text" id="chatInput" placeholder="اكتب سؤالك المالي هنا…" autocomplete="off">
+          <button type="submit" class="btn btn-primary btn-send">إرسال</button>
+        </form>
+        <div class="chat-suggestions">
+          <button type="button" class="chip" data-q="كم صرفت هذا الشهر؟">كم صرفت هذا الشهر؟</button>
+          <button type="button" class="chip" data-q="هل أقدر أشتري سيارة؟">هل أقدر أشتري سيارة؟</button>
+          <button type="button" class="chip" data-q="كيف أوصل إلى ادخار ٥٠ ألف؟">كيف أوصل لادخار ٥٠ ألف؟</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINANCIAL TWIN ===== -->
+  <section id="twin" class="section twin-section">
+    <div class="wrap">
+      <p class="section-eyebrow">٠٢ — التوأم المالي</p>
+      <h2>شوف مستقبلك المالي قبل ما تقرر</h2>
+      <p class="section-lead">حرّك الأرقام وشوف أثر القرار على رصيدك خلال ٦٠ شهر.</p>
+
+      <div class="twin-grid">
+        <div class="twin-controls card">
+          <label class="field">
+            <span>الدخل الشهري (ريال)</span>
+            <input type="number" id="twinIncome" value="12000" step="500">
+          </label>
+          <label class="field">
+            <span>المصروفات الثابتة (ريال)</span>
+            <input type="number" id="twinExpenses" value="7200" step="200">
+          </label>
+          <label class="field">
+            <span>تكلفة القرار الشهرية (ريال)</span>
+            <input type="number" id="twinDecision" value="2200" step="100">
+          </label>
+          <label class="field">
+            <span>وصف القرار</span>
+            <input type="text" id="twinLabel" value="شراء سيارة بـ 120,000 ريال">
+          </label>
+          <button class="btn btn-primary btn-block" id="twinRun">شغّل المحاكاة</button>
+        </div>
+
+        <div class="twin-result card">
+          <div class="twin-verdict" id="twinVerdict">
+            <span class="verdict-badge" id="verdictBadge">جاهز</span>
+            <p id="verdictText">عدّل الأرقام واضغط «شغّل المحاكاة» لترى النتيجة.</p>
+          </div>
+          <canvas id="twinChart" width="640" height="220"></canvas>
+          <div class="twin-stats" id="twinStats"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INVESTMENT FUND ===== -->
+  <section id="fund" class="section fund-section">
+    <div class="wrap">
+      <p class="section-eyebrow">٠٣ — الصندوق الاستثماري</p>
+      <h2>بديل ذكي عن "اشترِ الآن وادفع لاحقًا"</h2>
+      <p class="section-lead">بدل ما يسحب منك قسط لتسدد دين، رصيد يبني لك صندوق ينمو — تشتري لما توفّر، مو قبل.</p>
+
+      <div class="fund-compare">
+        <div class="compare-card compare-bad">
+          <h3>❌ تابي / تمارا</h3>
+          <ul>
+            <li>يسحب إجباري لسداد دين</li>
+            <li>ما فيه عائد يرجع لك</li>
+            <li>تشتري الحين وتتحمل الالتزام بعدين</li>
+            <li>يرفع التزاماتك الشهرية</li>
+          </ul>
+        </div>
+        <div class="compare-card compare-good">
+          <h3>✅ صندوق رصيد</h3>
+          <ul>
+            <li>يسحب تلقائي لبناء رصيدك</li>
+            <li>عائد استثماري تراكمي لك أنت</li>
+            <li>تشتري بعد ما يتوفر المبلغ فعليًا</li>
+            <li>يرفع مدّخراتك لا التزاماتك</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="twin-grid">
+        <div class="twin-controls card">
+          <label class="field">
+            <span>هدف الصندوق (ريال)</span>
+            <input type="number" id="fundGoal" value="15000" step="500">
+          </label>
+          <label class="field">
+            <span>السحب الشهري (ريال)</span>
+            <input type="number" id="fundMonthly" value="800" step="50">
+          </label>
+          <label class="field">
+            <span>العائد السنوي المتوقع (%)</span>
+            <input type="number" id="fundReturn" value="8" step="0.5">
+          </label>
+          <button class="btn btn-primary btn-block" id="fundRun">احسب خطة الصندوق</button>
+        </div>
+
+        <div class="twin-result card">
+          <div class="twin-verdict">
+            <span class="verdict-badge" id="fundBadge">جاهز</span>
+            <p id="fundVerdictText">عدّل الأرقام واضغط «احسب خطة الصندوق».</p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar" id="fundProgressBar" style="width:0%"></div>
+            <span class="progress-label" id="fundProgressLabel">التقدم نحو الهدف 0%</span>
+          </div>
+          <div class="twin-stats" id="fundStats"></div>
+          <div class="schedule-table" id="fundSchedule"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLASSIFY ===== -->
+  <section id="classify" class="section classify-section">
+    <div class="wrap">
+      <p class="section-eyebrow">٠٤ — تصنيف المعاملات</p>
+      <h2>كل معاملة بنكية تتصنف تلقائيًا</h2>
+      <p class="section-lead">جرّب: اكتب اسم تاجر ومبلغ، وشوف كيف يصنّفها رصيد.</p>
+      <p class="classify-disclaimer">⚠️ التصنيف الحي هنا يعتمد على نموذج مدرّب بـ 8 فئات أساسية (دقة 88.3%). الفئات الموسّعة (إلكترونيات، أثاث، ملابس...) تظهر في تحليل البيانات المرفوعة والمحاكاة، لا في هذا التصنيف الفوري.</p>
+
+      <div class="classify-frame card">
+        <div class="classify-inputs">
+          <label class="field">
+            <span>اسم التاجر</span>
+            <input type="text" id="clsMerchant" value="كارفور" placeholder="مثال: كارفور">
+          </label>
+          <label class="field">
+            <span>المبلغ (ريال)</span>
+            <input type="number" id="clsAmount" value="250" step="10">
+          </label>
+          <button class="btn btn-primary" id="clsRun">صنّف المعاملة</button>
+        </div>
+        <div class="classify-result" id="clsResult">
+          <p class="muted">النتيجة تظهر هنا بعد التصنيف.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">رصيد</span>
+      <p>لأن أفضل قرار مالي هو القرار الذي تتخذه قبل أن تدفع.</p>
+    </div>
+    <div class="footer-meta">
+      <span>فريق عمار طويق</span>
+      <span>هاكاثون أمد 2026 — أكاديمية طويق</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
