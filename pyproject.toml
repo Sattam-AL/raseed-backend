@@ -1,0 +1,19 @@
+[project]
+name = "raseed-backend"
+version = "1.0.0"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pandas",
+    "scikit-learn",
+    "joblib",
+    "openpyxl",
+    "pydantic",
+    "python-multipart",
+    "anthropic",
+    "python-dotenv",
+    "sqlalchemy",
+    "psycopg2-binary",
+    "httpx"
+]
+requires-python = ">=3.11"
